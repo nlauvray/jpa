@@ -1,6 +1,7 @@
 package fr.epsi;
 
-import fr.epsi.Biblio.Livre;
+import fr.epsi.Biblio.Client;
+import fr.epsi.Biblio.Emprunt;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -14,12 +15,18 @@ public class ConnexionJpa {
 
         em.getTransaction().begin();
 
-        Livre livre = em.find(Livre.class, 1);
+        Client client = em.find(Client.class, 1);
 
         em.getTransaction().commit();
 
-        if (livre != null) {
-            System.out.println(livre.getId());
+        if (client != null) {
+            System.out.println("Client trouvé : " + client);
+            System.out.println("Emprunts associés :");
+            for (Emprunt emprunt : client.getEmprunts()) {
+                System.out.println(emprunt);
+            }
+        } else {
+            System.out.println("Aucun client trouvé avec cet ID.");
         }
 
         em.close();

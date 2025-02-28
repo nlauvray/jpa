@@ -4,34 +4,35 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "LIVRE")
-public class Livre {
+@Table(name = "CLIENT")
+public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "TITRE")
-    private String titre;
+    @Column(name = "NOM")
+    private String nom;
 
-    @Column(name = "AUTEUR")
-    private String auteur;
+    @Column(name = "PRENOM")
+    private String prenom;
 
-    @ManyToMany(mappedBy = "livres")
+    @OneToMany(mappedBy = "client")
     private List<Emprunt> emprunts;
 
-    public Livre() {}
+    public Client() {
+    }
 
     public int getId() {
         return id;
     }
 
-    public String getTitre() {
-        return titre;
+    public String getNom() {
+        return nom;
     }
 
-    public String getAuteur() {
-        return auteur;
+    public String getPrenom() {
+        return prenom;
     }
 
     public List<Emprunt> getEmprunts() {
@@ -40,10 +41,10 @@ public class Livre {
 
     @Override
     public String toString() {
-        return "Livre{" +
+        return "Client{" +
                 "id=" + id +
-                ", titre='" + titre + '\'' +
-                ", auteur='" + auteur + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
                 '}';
     }
 }
